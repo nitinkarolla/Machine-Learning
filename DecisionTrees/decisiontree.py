@@ -26,10 +26,9 @@ def data_generator(m):
         for i in range(14):
             x = np.random.binomial(1, p=0.75, size= 1)[0]
             if x == 1:
-                y.append(a)
+                y.append(y[i])
             else:
-                y.append(1-a)
-                a = 1-a
+                y.append(1-y[i])
         for i in range(6):
             x = np.random.binomial(1, p = 0.5, size = 1)[0]
             y.append(x)
@@ -80,11 +79,13 @@ class Decision_Tree_ID3():
     is built on split variable which is indentified using the logic 
     of information gain 
     """
-    def __init__(self, root = None, termination_depth = None, min_leaf_size = 4, sig_threshold = None):
+    def __init__(self, root = None, termination_depth = None, min_leaf_size = None, sig_threshold = None, var = None):
         self.root = root
         self.termination_depth = termination_depth
         self.min_leaf_size = min_leaf_size
         self.sig_threshold = sig_threshold
+        if var == None:
+            self.var = []
         
     def _entropy(self, data, variable):
         """
@@ -126,6 +127,22 @@ class Decision_Tree_ID3():
             split_variable = (0,0)
         return(split_variable)
     
+    def _chi_square(self,data,var,target):
+        chi_square = []
+        for i in data[var].unique():
+            for j in data[target].unique():
+                expected_x = (data[var].value_counts()[i]/len(data[var]))
+                expected_y = (data[target].value_counts()[j]/len(data[target]))
+                expected = expected_x * expected_y * len(data[var])
+                #print(expected)
+
+                observed = data[(data[var] == i) & (data[target] == j )].shape[0]
+                #print(observed)
+
+                out = (expected - observed)**2 / expected
+                chi_square.append(out)
+        return (sum(chi_square))
+    
 
     def _split_data(self, data, split_variable): 
         """
@@ -150,12 +167,21 @@ class Decision_Tree_ID3():
         #Terminating Conditions
         if self._split_variable_identification(data.data, target)[1] == 0 :
             return
-        if data.depth == self.termination_depth:
-            return
-        if data.data.shape[0] <= self.min_leaf_size:
-            return
+        if self.termination_depth != None:
+            if data.depth == self.termination_depth:
+                return
+        if self.min_leaf_size != None:
+            if data.data.shape[0] <= self.min_leaf_size:
+                return
         
         split_variable = self._split_variable_identification(data.data, target)[0]
+        
+        #Terminating Conditions
+        if self.sig_threshold != None:
+            if self._chi_square(data.data,split_variable,target) < self.sig_threshold:
+                return
+        
+        
         data.child = self._split_data(data.data, split_variable)
         for i in data.child:
             i.depth = data.depth + 1
@@ -165,10 +191,12 @@ class Decision_Tree_ID3():
                 self.fit(i, target)
             
     
-    def get_rules(self, model = None ,ruleList = []):
+    def get_rules(self, model = None ,ruleList = None):
         """
         Returns the rules for each leaf and the major class in the leaf
         """
+        if ruleList == None:
+            ruleList = []
         if model == None:
             model = self.root
         ruleList.append(model.rule)
@@ -178,23 +206,21 @@ class Decision_Tree_ID3():
         for i in model.child:
             self.get_rules(i,ruleList.copy())
             
-    def get_irrelevant_variable(self, irrelevant_variables, model = None , var = []):
+    def get_irrelevant_variable(self, irrelevant_variables, model = None ):
         """
         Returns the count of irrelevant variables present in the decision tree
         """
+           
         if model == None:
             model = self.root
-
         if model.child == None:
             return
-
         for i in model.child:
             if i.rule[0] in irrelevant_variables:
-                var.append(i.rule[0])
-                print(var)
-            self.get_irrelevant_variable(irrelevant_variables,i,var)
-        
-        irr_var = list(set(var))
+                self.var.append(i.rule[0])
+                #print(var)
+            self.get_irrelevant_variable(irrelevant_variables,i)
+        return list(set(self.var))
     
 
     def _predict_row(self, model, row):
@@ -229,12 +255,18 @@ class Decision_Tree_ID3():
         """
         predict_train = self.predict(data)
         return (1 -sum(data['Y'] == predict_train)/ len(data))
+    
+    def error(self, test, target):
+        """
+        Returns the training error of the  fitted decision tree
+        """
+        predict_test = self.predict(test.drop(target, axis = 1))
+        return (1 -sum(test[target] == predict_test)/ len(test))
+            
 
 
 
 data = data_generator(1000)
 tree = Decision_Tree_ID3()
 tree.fit(data, 'Y')
-
-irrelevant_variables = ['X15','X16','X17','X18','X19','X20']
-tree.get_irrelevant_variable(irrelevant_variables)
+print(tree.training_error())
