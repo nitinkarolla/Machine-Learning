@@ -1,0 +1,1550 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Pruning}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{CS 536 : Pruning Decision
+Trees}\label{cs-536-pruning-decision-trees}
+
+\paragraph{Submitted by Nitin Reddy Karolla
+(nrk60)}\label{submitted-by-nitin-reddy-karolla-nrk60}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{c+c1}{\PYZsh{} Importing the required packages for the assignment}
+         
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{math}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{from} \PY{n+nn}{tqdm} \PY{k}{import} \PY{n}{tqdm}
+         \PY{k+kn}{from} \PY{n+nn}{statistics} \PY{k}{import} \PY{n}{mode}
+         \PY{k+kn}{from} \PY{n+nn}{multiprocessing} \PY{k}{import} \PY{n}{Pool}
+         
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \subsubsection{1) Write a function to generate m samples of (X, Y), and
+another to fit a tree to that data using ID3. Write a third function to,
+given a decision tree f, estimate the error rate of that decision tree
+on the underlying data, err(f). Do this repeatedly for a range of m
+values, and plot the `typical' error of a tree trained on m data points
+as a function of m. Does this agree with your
+intuition?}\label{write-a-function-to-generate-m-samples-of-x-y-and-another-to-fit-a-tree-to-that-data-using-id3.-write-a-third-function-to-given-a-decision-tree-f-estimate-the-error-rate-of-that-decision-tree-on-the-underlying-data-errf.-do-this-repeatedly-for-a-range-of-m-values-and-plot-the-typical-error-of-a-tree-trained-on-m-data-points-as-a-function-of-m.-does-this-agree-with-your-intuition}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{k}{def} \PY{n+nf}{data\PYZus{}generator}\PY{p}{(}\PY{n}{m}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Input : }
+         \PY{l+s+sd}{        m \PYZhy{} Number of samples}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Output : }
+         \PY{l+s+sd}{        Dataframe with k+1 columns i.e. k features that represent X }
+         \PY{l+s+sd}{        and 1 the represents Y}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{colnames} \PY{o}{=} \PY{p}{[} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)}  \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{21}\PY{p}{)}\PY{p}{]}
+             
+             \PY{n}{X} \PY{o}{=} \PY{p}{[}\PY{p}{]} 
+             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{m}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{binomial}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{p}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{size}\PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                 \PY{n}{y}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{binomial}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{p}\PY{o}{=}\PY{l+m+mf}{0.75}\PY{p}{,} \PY{n}{size}\PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                     \PY{k}{if} \PY{n}{x} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+                         \PY{n}{y}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                     \PY{k}{else}\PY{p}{:}
+                         \PY{n}{y}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{binomial}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{p} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                     \PY{n}{y}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                 \PY{n}{X}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+              
+             \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{o}{=} \PY{n}{X}\PY{p}{,} \PY{n}{columns}\PY{o}{=} \PY{n}{colnames}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}Generating the Y}
+             \PY{n}{Y} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{X}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{i}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n}{y} \PY{o}{=} \PY{n}{mode}\PY{p}{(}\PY{n}{i}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{8}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{else} \PY{p}{:}
+                     \PY{n}{y} \PY{o}{=} \PY{n}{mode}\PY{p}{(}\PY{n}{i}\PY{p}{[}\PY{l+m+mi}{8}\PY{p}{:}\PY{l+m+mi}{15}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{Y}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}Generate column names}
+             \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{data} \PY{o}{=} \PY{n}{Y}\PY{p}{)}
+             \PY{k}{return}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{k}{class} \PY{n+nc}{Node}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Node is a data structure which will be used for decision trees.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Input :}
+         \PY{l+s+sd}{        data = training data post split is stored}
+         \PY{l+s+sd}{        rule = feature on which the split led to this node and the }
+         \PY{l+s+sd}{        value of the feature}
+         \PY{l+s+sd}{        child = nodes of children of all this node are present }
+         \PY{l+s+sd}{        after the split}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}
+                          \PY{n}{data} \PY{o}{=} \PY{k+kc}{None}\PY{p}{,}
+                          \PY{n}{rule} \PY{o}{=} \PY{k+kc}{None}\PY{p}{,}
+                          \PY{n}{child} \PY{o}{=} \PY{k+kc}{None}\PY{p}{,}
+                          \PY{n}{depth} \PY{o}{=} \PY{k+kc}{None}
+                         \PY{p}{)}\PY{p}{:}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{data} \PY{o}{=} \PY{n}{data}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{rule} \PY{o}{=} \PY{n}{rule}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{child} \PY{o}{=} \PY{n}{child}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{depth} \PY{o}{=} \PY{n}{depth}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{k}{class} \PY{n+nc}{Decision\PYZus{}Tree\PYZus{}ID3}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Decision Tree ID3 is trained on data with a target variable. It }
+         \PY{l+s+sd}{    is built on split variable which is indentified using the logic }
+         \PY{l+s+sd}{    of information gain }
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{root} \PY{o}{=} \PY{k+kc}{None}\PY{p}{,} \PY{n}{termination\PYZus{}depth} \PY{o}{=} \PY{k+kc}{None}\PY{p}{,} 
+                          \PY{n}{min\PYZus{}leaf\PYZus{}size} \PY{o}{=} \PY{k+kc}{None}\PY{p}{,} \PY{n}{sig\PYZus{}threshold} \PY{o}{=} \PY{k+kc}{None}\PY{p}{,} \PY{n}{var} \PY{o}{=} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{root} \PY{o}{=} \PY{n}{root}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{termination\PYZus{}depth} \PY{o}{=} \PY{n}{termination\PYZus{}depth}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{min\PYZus{}leaf\PYZus{}size} \PY{o}{=} \PY{n}{min\PYZus{}leaf\PYZus{}size}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sig\PYZus{}threshold} \PY{o}{=} \PY{n}{sig\PYZus{}threshold}
+                 \PY{k}{if} \PY{n}{var} \PY{o}{==} \PY{k+kc}{None}\PY{p}{:}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{var} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 
+             \PY{k}{def} \PY{n+nf}{\PYZus{}entropy}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{data}\PY{p}{,} \PY{n}{variable}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{        Calcuates the entropy for the given data and target variable}
+         \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                 \PY{n}{entropy\PYZus{}value} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{data}\PY{p}{[}\PY{n}{variable}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{/} 
+                                       \PY{n}{data}\PY{p}{[}\PY{n}{variable}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{log2}\PY{p}{(}\PY{p}{(}
+                     \PY{n}{data}\PY{p}{[}\PY{n}{variable}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{/} 
+                     \PY{n}{data}\PY{p}{[}\PY{n}{variable}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{l+m+mf}{0.00000001}\PY{p}{)} 
+                                      \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{data}\PY{p}{[}\PY{n}{variable}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{entropy\PYZus{}value}
+             
+             
+             \PY{k}{def} \PY{n+nf}{\PYZus{}information\PYZus{}gain}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{data}\PY{p}{,} \PY{n}{variable}\PY{p}{,} \PY{n}{target}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{        Calculates the information gain for the given variable and data}
+         \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                 \PY{n}{infomation\PYZus{}content} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{n}{variable}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{/}
+                                           \PY{n}{data}\PY{p}{[}\PY{n}{variable}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+                                           \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entropy}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{n}{variable}\PY{p}{]}\PY{o}{==} \PY{n}{i}\PY{p}{]}\PY{p}{,} 
+                                                          \PY{n}{target}\PY{p}{)} 
+                                           \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{data}\PY{p}{[}\PY{n}{variable}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{info\PYZus{}gain} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}entropy}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{target}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{infomation\PYZus{}content}
+                 \PY{k}{return}\PY{p}{(}\PY{n}{info\PYZus{}gain}\PY{p}{)}
+             
+             
+             \PY{k}{def} \PY{n+nf}{\PYZus{}split\PYZus{}variable\PYZus{}identification}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{data}\PY{p}{,} \PY{n}{target}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{        Identifies the split variable based on data and target}
+         \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                 \PY{c+c1}{\PYZsh{}loop through all features and calculate information gain for each feature}
+                 \PY{n}{variable\PYZus{}ig\PYZus{}required} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{columns}\PY{p}{)}
+                 \PY{n}{variable\PYZus{}ig\PYZus{}required}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{ig\PYZus{}values} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}information\PYZus{}gain}\PY{p}{(}\PY{n}{data}\PY{p}{,}\PY{n}{i}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)} 
+                              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{variable\PYZus{}ig\PYZus{}required}\PY{p}{]}
+                 \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{ig\PYZus{}values}\PY{p}{)} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n}{split\PYZus{}variable} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{ig\PYZus{}values}\PY{p}{,} \PY{n}{key} \PY{o}{=} \PY{k}{lambda} \PY{n}{item} \PY{p}{:} \PY{n}{item}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{split\PYZus{}variable} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}
+                 \PY{k}{return}\PY{p}{(}\PY{n}{split\PYZus{}variable}\PY{p}{)}
+             
+             \PY{k}{def} \PY{n+nf}{\PYZus{}chi\PYZus{}square}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{data}\PY{p}{,}\PY{n}{var}\PY{p}{,}\PY{n}{target}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{chi\PYZus{}square} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{data}\PY{p}{[}\PY{n}{var}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n}{data}\PY{p}{[}\PY{n}{target}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{expected\PYZus{}x} \PY{o}{=} \PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{var}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{var}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                         \PY{n}{expected\PYZus{}y} \PY{o}{=} \PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{target}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{target}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                         \PY{n}{expected} \PY{o}{=} \PY{n}{expected\PYZus{}x} \PY{o}{*} \PY{n}{expected\PYZus{}y} \PY{o}{*} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{var}\PY{p}{]}\PY{p}{)}
+                         \PY{c+c1}{\PYZsh{}print(expected)}
+         
+                         \PY{n}{observed} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{var}\PY{p}{]} \PY{o}{==} \PY{n}{i}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{target}\PY{p}{]} \PY{o}{==} \PY{n}{j} \PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                         \PY{c+c1}{\PYZsh{}print(observed)}
+         
+                         \PY{n}{out} \PY{o}{=} \PY{p}{(}\PY{n}{expected} \PY{o}{\PYZhy{}} \PY{n}{observed}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{/} \PY{n}{expected}
+                         \PY{n}{chi\PYZus{}square}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{out}\PY{p}{)}
+                 \PY{k}{return} \PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{chi\PYZus{}square}\PY{p}{)}\PY{p}{)}
+             
+         
+             \PY{k}{def} \PY{n+nf}{\PYZus{}split\PYZus{}data}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{data}\PY{p}{,} \PY{n}{split\PYZus{}variable}\PY{p}{)}\PY{p}{:} 
+                 \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{        Splits the data after identifying the split variable, assigns }
+         \PY{l+s+sd}{        data and rule to the node.}
+         \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                 \PY{n}{splitted\PYZus{}data} \PY{o}{=} \PY{p}{[}\PY{n}{Node}\PY{p}{(}\PY{n}{data} \PY{o}{=} \PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{n}{split\PYZus{}variable}\PY{p}{]} \PY{o}{==} \PY{n}{i}\PY{p}{]}\PY{o}{.}
+                                               \PY{n}{drop}\PY{p}{(}\PY{n}{split\PYZus{}variable}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+                                       \PY{n}{rule} \PY{o}{=} \PY{p}{(}\PY{n}{split\PYZus{}variable}\PY{p}{,}\PY{n}{i}\PY{p}{)}\PY{p}{)} 
+                                  \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{data}\PY{p}{[}\PY{n}{split\PYZus{}variable}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+                 \PY{k}{return}\PY{p}{(}\PY{n}{splitted\PYZus{}data}\PY{p}{)}
+             
+             
+             \PY{k}{def} \PY{n+nf}{fit}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{data}\PY{p}{,} \PY{n}{target}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{        Fit is used to fit decision trees on the data for a given target variable}
+         \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                 \PY{k}{if} \PY{n+nb}{type}\PY{p}{(}\PY{n}{data}\PY{p}{)} \PY{o}{!=} \PY{n}{Node}\PY{p}{:}
+                     \PY{n}{data} \PY{o}{=} \PY{n}{Node}\PY{p}{(}\PY{n}{data} \PY{o}{=} \PY{n}{data}\PY{p}{,} \PY{n}{depth} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{root} \PY{o}{=} \PY{n}{data}
+                 
+                 \PY{c+c1}{\PYZsh{}Terminating Conditions}
+                 \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}split\PYZus{}variable\PYZus{}identification}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{data}\PY{p}{,} \PY{n}{target}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0} \PY{p}{:}
+                     \PY{k}{return}
+                 \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{termination\PYZus{}depth} \PY{o}{!=} \PY{k+kc}{None}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{data}\PY{o}{.}\PY{n}{depth} \PY{o}{==} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{termination\PYZus{}depth}\PY{p}{:}
+                         \PY{k}{return}
+                 \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{min\PYZus{}leaf\PYZus{}size} \PY{o}{!=} \PY{k+kc}{None}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{data}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{min\PYZus{}leaf\PYZus{}size}\PY{p}{:}
+                         \PY{k}{return}
+                 
+                 \PY{n}{split\PYZus{}variable} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}split\PYZus{}variable\PYZus{}identification}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{data}\PY{p}{,} \PY{n}{target}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                 
+                 \PY{c+c1}{\PYZsh{}Terminating Conditions}
+                 \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sig\PYZus{}threshold} \PY{o}{!=} \PY{k+kc}{None}\PY{p}{:}
+                     \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}chi\PYZus{}square}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{data}\PY{p}{,}\PY{n}{split\PYZus{}variable}\PY{p}{,}\PY{n}{target}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sig\PYZus{}threshold}\PY{p}{:}
+                         \PY{k}{return}
+                 
+                 \PY{c+c1}{\PYZsh{}Adding depth to the node}
+                 \PY{n}{data}\PY{o}{.}\PY{n}{child} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}split\PYZus{}data}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{data}\PY{p}{,} \PY{n}{split\PYZus{}variable}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{data}\PY{o}{.}\PY{n}{child}\PY{p}{:}
+                     \PY{n}{i}\PY{o}{.}\PY{n}{depth} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{depth} \PY{o}{+} \PY{l+m+mi}{1}
+                        
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{data}\PY{o}{.}\PY{n}{child}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{i}\PY{o}{.}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{nunique}\PY{p}{(}\PY{p}{)} \PY{o}{!=} \PY{l+m+mi}{1}\PY{p}{:}
+                         \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{target}\PY{p}{)}
+                     
+             
+             \PY{k}{def} \PY{n+nf}{get\PYZus{}rules}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{model} \PY{o}{=} \PY{k+kc}{None} \PY{p}{,}\PY{n}{ruleList} \PY{o}{=} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{        Returns the rules for each leaf and the major class in the leaf}
+         \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                 \PY{k}{if} \PY{n}{ruleList} \PY{o}{==} \PY{k+kc}{None}\PY{p}{:}
+                     \PY{n}{ruleList} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{k}{if} \PY{n}{model} \PY{o}{==} \PY{k+kc}{None}\PY{p}{:}
+                     \PY{n}{model} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{root}
+                 \PY{n}{ruleList}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{rule}\PY{p}{)}
+                 \PY{k}{if} \PY{n}{model}\PY{o}{.}\PY{n}{child} \PY{o}{==} \PY{k+kc}{None}\PY{p}{:}
+                     \PY{n}{ruleList}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mode}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                     \PY{k}{return} \PY{n+nb}{print}\PY{p}{(}\PY{n}{ruleList}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{model}\PY{o}{.}\PY{n}{child}\PY{p}{:}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{get\PYZus{}rules}\PY{p}{(}\PY{n}{i}\PY{p}{,}\PY{n}{ruleList}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                     
+             \PY{k}{def} \PY{n+nf}{get\PYZus{}irrelevant\PYZus{}variable}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{irrelevant\PYZus{}variables}\PY{p}{,} \PY{n}{model} \PY{o}{=} \PY{k+kc}{None} \PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{        Returns the count of irrelevant variables present in the decision tree}
+         \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}} 
+                 \PY{k}{if} \PY{n}{model} \PY{o}{==} \PY{k+kc}{None}\PY{p}{:}
+                     \PY{n}{model} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{root}
+                 \PY{k}{if} \PY{n}{model}\PY{o}{.}\PY{n}{child} \PY{o}{==} \PY{k+kc}{None}\PY{p}{:}
+                     \PY{k}{return}
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{model}\PY{o}{.}\PY{n}{child}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{i}\PY{o}{.}\PY{n}{rule}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o+ow}{in} \PY{n}{irrelevant\PYZus{}variables}\PY{p}{:}
+                         \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{var}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{o}{.}\PY{n}{rule}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                     \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{get\PYZus{}irrelevant\PYZus{}variable}\PY{p}{(}\PY{n}{irrelevant\PYZus{}variables}\PY{p}{,}\PY{n}{i}\PY{p}{)}
+                 \PY{k}{return} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{var}\PY{p}{)}\PY{p}{)}
+             
+         
+             \PY{k}{def} \PY{n+nf}{\PYZus{}predict\PYZus{}row}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{model}\PY{p}{,} \PY{n}{row}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{        This function returns the prediction for the a single sample of }
+         \PY{l+s+sd}{        data using the fitted data}
+         \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                 \PY{k}{if} \PY{n}{model}\PY{o}{.}\PY{n}{child} \PY{o}{==} \PY{k+kc}{None}\PY{p}{:}
+                     \PY{k}{return}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mode}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         
+                 \PY{n}{variable} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{child}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{rule}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                 \PY{n}{row\PYZus{}value} \PY{o}{=} \PY{n}{row}\PY{p}{[}\PY{n}{variable}\PY{p}{]}
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{model}\PY{o}{.}\PY{n}{child}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{i}\PY{o}{.}\PY{n}{rule}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{==} \PY{n}{row\PYZus{}value}\PY{p}{:}
+                         \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}predict\PYZus{}row}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{row}\PY{p}{)}
+                     
+             \PY{k}{def} \PY{n+nf}{predict}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{test}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{        Predict funtion will take an input data and return the prediction}
+         \PY{l+s+sd}{        based on the fitted decision tree}
+         \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                 \PY{n}{predicted\PYZus{}y} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{test}\PY{o}{.}\PY{n}{iterrows}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{x} \PY{o}{=} \PY{n}{i}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+                     \PY{n}{y} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}predict\PYZus{}row}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{root}\PY{p}{,} \PY{n}{x}\PY{p}{)}
+                     \PY{n}{predicted\PYZus{}y}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{predicted\PYZus{}y}\PY{p}{)}
+             
+             \PY{k}{def} \PY{n+nf}{training\PYZus{}error}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{        Returns the training error of the  fitted decision tree}
+         \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                 \PY{n}{predict\PYZus{}train} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{root}\PY{o}{.}\PY{n}{data}\PY{p}{)}
+                 \PY{k}{return} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}}\PY{n+nb}{sum}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{root}\PY{o}{.}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{predict\PYZus{}train}\PY{p}{)}\PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{root}\PY{o}{.}\PY{n}{data}\PY{p}{)}\PY{p}{)}
+             
+             \PY{k}{def} \PY{n+nf}{error}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{test}\PY{p}{,} \PY{n}{target}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{        Returns the training error of the  fitted decision tree}
+         \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                 \PY{n}{predict\PYZus{}test} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{target}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{return} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{test}\PY{p}{[}\PY{n}{target}\PY{p}{]} \PY{o}{==} \PY{n}{predict\PYZus{}test}\PY{p}{)}\PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{test}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{k}{def} \PY{n+nf}{typical\PYZus{}error}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{n}{test\PYZus{}data\PYZus{}size}\PY{p}{,} \PY{n}{simulations} \PY{o}{=} \PY{l+m+mi}{50}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Generate error for similations for a generated test data and }
+         \PY{l+s+sd}{    given decision tree.}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{error} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{simulations}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{test\PYZus{}data} \PY{o}{=} \PY{n}{data\PYZus{}generator}\PY{p}{(}\PY{n}{test\PYZus{}data\PYZus{}size}\PY{p}{)}
+                 \PY{n}{predicted\PYZus{}y} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test\PYZus{}data}\PY{p}{)}
+                 \PY{n}{error\PYZus{}current} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{test\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n}{predicted\PYZus{}y}\PY{p}{)}\PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{test\PYZus{}data}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{error}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{error\PYZus{}current}\PY{p}{)}
+             \PY{k}{return} \PY{n}{error}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{c+c1}{\PYZsh{}Defining the repetitions values for generating m samples of training data}
+         \PY{n}{start} \PY{o}{=} \PY{l+m+mi}{400}
+         \PY{n}{end} \PY{o}{=} \PY{l+m+mi}{4000}
+         \PY{n}{step} \PY{o}{=} \PY{l+m+mi}{100}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{n}{err\PYZus{}abs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{m} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{tqdm}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n}{start}\PY{p}{,}\PY{n}{end}\PY{p}{,}\PY{n}{step}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{data} \PY{o}{=} \PY{n}{data\PYZus{}generator}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+             \PY{n}{dt} \PY{o}{=} \PY{n}{Decision\PYZus{}Tree\PYZus{}ID3}\PY{p}{(}\PY{p}{)}
+             \PY{n}{dt}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{err\PYZus{}f} \PY{o}{=} \PY{n}{typical\PYZus{}error}\PY{p}{(}\PY{n}{dt}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}
+             \PY{n}{err\PYZus{}final} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{err\PYZus{}f}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{err\PYZus{}f}\PY{p}{)}
+             \PY{n}{err\PYZus{}train} \PY{o}{=} \PY{n}{dt}\PY{o}{.}\PY{n}{training\PYZus{}error}\PY{p}{(}\PY{p}{)}
+             \PY{n}{m}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}print( err\PYZus{}final, err\PYZus{}train)}
+             \PY{n}{err\PYZus{}abs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{err\PYZus{}final}\PY{o}{\PYZhy{}}\PY{n}{err\PYZus{}train}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+
+  0\%|                                                                                           | 0/36 [00:00<?, ?it/s]
+
+
+  3\%|██▎                                                                                | 1/36 [00:12<07:08, 12.23s/it]
+
+
+  6\%|████▌                                                                              | 2/36 [00:27<07:24, 13.09s/it]
+
+
+  8\%|██████▉                                                                            | 3/36 [00:44<07:57, 14.46s/it]
+
+
+ 11\%|█████████▏                                                                         | 4/36 [00:58<07:38, 14.32s/it]
+
+
+ 14\%|███████████▌                                                                       | 5/36 [01:16<07:52, 15.24s/it]
+
+
+ 17\%|█████████████▊                                                                     | 6/36 [01:37<08:28, 16.95s/it]
+
+
+ 19\%|████████████████▏                                                                  | 7/36 [01:59<08:53, 18.41s/it]
+
+
+ 22\%|██████████████████▍                                                                | 8/36 [02:23<09:27, 20.26s/it]
+
+
+ 25\%|████████████████████▊                                                              | 9/36 [02:49<09:51, 21.92s/it]
+
+
+ 28\%|██████████████████████▊                                                           | 10/36 [03:15<10:05, 23.28s/it]
+
+
+ 31\%|█████████████████████████                                                         | 11/36 [03:40<09:54, 23.79s/it]
+
+
+ 33\%|███████████████████████████▎                                                      | 12/36 [04:04<09:29, 23.73s/it]
+
+
+ 36\%|█████████████████████████████▌                                                    | 13/36 [04:34<09:46, 25.51s/it]
+
+
+ 39\%|███████████████████████████████▉                                                  | 14/36 [04:59<09:21, 25.54s/it]
+
+
+ 42\%|██████████████████████████████████▏                                               | 15/36 [05:30<09:25, 26.95s/it]
+
+
+ 44\%|████████████████████████████████████▍                                             | 16/36 [06:01<09:24, 28.22s/it]
+
+
+ 47\%|██████████████████████████████████████▋                                           | 17/36 [06:39<09:51, 31.13s/it]
+
+
+ 50\%|█████████████████████████████████████████                                         | 18/36 [07:13<09:36, 32.05s/it]
+
+
+ 53\%|███████████████████████████████████████████▎                                      | 19/36 [07:45<09:04, 32.01s/it]
+
+
+ 56\%|█████████████████████████████████████████████▌                                    | 20/36 [08:22<08:55, 33.49s/it]
+
+
+ 58\%|███████████████████████████████████████████████▊                                  | 21/36 [08:54<08:16, 33.08s/it]
+
+
+ 61\%|██████████████████████████████████████████████████                                | 22/36 [09:25<07:34, 32.45s/it]
+
+
+ 64\%|████████████████████████████████████████████████████▍                             | 23/36 [10:00<07:14, 33.42s/it]
+
+
+ 67\%|██████████████████████████████████████████████████████▋                           | 24/36 [10:37<06:50, 34.23s/it]
+
+
+ 69\%|████████████████████████████████████████████████████████▉                         | 25/36 [11:14<06:27, 35.25s/it]
+
+
+ 72\%|███████████████████████████████████████████████████████████▏                      | 26/36 [11:51<05:56, 35.62s/it]
+
+
+ 75\%|█████████████████████████████████████████████████████████████▌                    | 27/36 [12:28<05:24, 36.07s/it]
+
+
+ 78\%|███████████████████████████████████████████████████████████████▊                  | 28/36 [13:02<04:44, 35.62s/it]
+
+
+ 81\%|██████████████████████████████████████████████████████████████████                | 29/36 [13:36<04:05, 35.08s/it]
+
+
+ 83\%|████████████████████████████████████████████████████████████████████▎             | 30/36 [14:14<03:35, 35.85s/it]
+
+
+ 86\%|██████████████████████████████████████████████████████████████████████▌           | 31/36 [14:48<02:56, 35.30s/it]
+
+
+ 89\%|████████████████████████████████████████████████████████████████████████▉         | 32/36 [15:25<02:23, 35.83s/it]
+
+
+ 92\%|███████████████████████████████████████████████████████████████████████████▏      | 33/36 [16:04<01:50, 36.75s/it]
+
+
+ 94\%|█████████████████████████████████████████████████████████████████████████████▍    | 34/36 [16:40<01:13, 36.72s/it]
+
+
+ 97\%|███████████████████████████████████████████████████████████████████████████████▋  | 35/36 [17:21<00:37, 37.73s/it]
+
+
+100\%|██████████████████████████████████████████████████████████████████████████████████| 36/36 [18:02<00:00, 38.72s/it]
+
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{lineplot}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{err\PYZus{}abs}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training Size (m)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Marginal Error}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Marginal error vs the training size (m)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}52}]:} Text(0.5,1,'Marginal error vs the training size (m)')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We expect that the Margincal error to decrease as the m increase, as the
+decision tree get to see more data and learn more. This can also be seen
+in plot above.
+
+    \subsubsection{2) Note that X15 through X20 are completely irrelevant to
+predicting the value of Y . For a range of m values, repeatedly generate
+data sets of that size and fit trees to that data, and estimate the
+average number of irrelevant variables that are included in the fit
+tree. How much data would you need, typically, to avoid fitting on this
+noise?}\label{note-that-x15-through-x20-are-completely-irrelevant-to-predicting-the-value-of-y-.-for-a-range-of-m-values-repeatedly-generate-data-sets-of-that-size-and-fit-trees-to-that-data-and-estimate-the-average-number-of-irrelevant-variables-that-are-included-in-the-fit-tree.-how-much-data-would-you-need-typically-to-avoid-fitting-on-this-noise}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{irrelevant\PYZus{}variables} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X15}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X16}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X17}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X18}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X19}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X20}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{k}{def} \PY{n+nf}{avg\PYZus{}irr\PYZus{}var}\PY{p}{(}\PY{n}{size}\PY{p}{,} \PY{n}{irrelevant\PYZus{}variables} \PY{o}{=} \PY{n}{irrelevant\PYZus{}variables}\PY{p}{,} \PY{n}{model\PYZus{}simulations} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+             \PY{n}{out} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{model\PYZus{}simulations}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{tree} \PY{o}{=} \PY{n}{Decision\PYZus{}Tree\PYZus{}ID3}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{data} \PY{o}{=} \PY{n}{data\PYZus{}generator}\PY{p}{(}\PY{n}{m} \PY{o}{=} \PY{n}{size}\PY{p}{)}
+                 \PY{n}{tree}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{out}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{tree}\PY{o}{.}\PY{n}{get\PYZus{}irrelevant\PYZus{}variable}\PY{p}{(}\PY{n}{irrelevant\PYZus{}variables}\PY{o}{=} \PY{n}{irrelevant\PYZus{}variables}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{out}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{out}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{irv\PYZus{}m} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{,}\PY{l+m+mi}{2500}\PY{p}{,}\PY{l+m+mi}{5000}\PY{p}{,}\PY{l+m+mi}{10000}\PY{p}{,}\PY{l+m+mi}{50000}\PY{p}{,}\PY{l+m+mi}{100000}\PY{p}{,}\PY{l+m+mi}{250000}\PY{p}{]}
+         \PY{n}{irv\PYZus{}var\PYZus{}average} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{tqdm}\PY{p}{(}\PY{n}{irv\PYZus{}m}\PY{p}{)}\PY{p}{:}
+             \PY{n}{irv\PYZus{}var\PYZus{}average}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{avg\PYZus{}irr\PYZus{}var}\PY{p}{(}\PY{n}{size} \PY{o}{=} \PY{n}{i}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+
+  0\%|                                                                                            | 0/9 [00:00<?, ?it/s]
+
+
+ 11\%|█████████▎                                                                          | 1/9 [00:23<03:11, 23.92s/it]
+
+
+ 22\%|██████████████████▋                                                                 | 2/9 [01:33<04:22, 37.56s/it]
+
+
+ 33\%|████████████████████████████                                                        | 3/9 [03:18<05:47, 57.98s/it]
+
+
+ 44\%|█████████████████████████████████████▎                                              | 4/9 [06:00<07:25, 89.11s/it]
+
+
+ 56\%|██████████████████████████████████████████████                                     | 5/9 [09:53<08:48, 132.11s/it]
+
+
+ 67\%|███████████████████████████████████████████████████████▎                           | 6/9 [14:51<09:05, 181.93s/it]
+
+
+ 78\%|████████████████████████████████████████████████████████████████▌                  | 7/9 [21:54<08:28, 254.17s/it]
+
+
+ 89\%|█████████████████████████████████████████████████████████████████████████▊         | 8/9 [30:35<05:34, 334.22s/it]
+
+
+100\%|███████████████████████████████████████████████████████████████████████████████████| 9/9 [41:46<00:00, 435.52s/it]
+
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{lineplot}\PY{p}{(}\PY{n}{irv\PYZus{}m}\PY{p}{,}\PY{n}{irv\PYZus{}var\PYZus{}average}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training size}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average Irrevelant Variables}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training size vs Avg Irrevelant Variables}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}43}]:} Text(0.5,1,'Training size vs Avg Irrevelant Variables')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    As we can see the average number of irrelevant variables decrease with
+increase in training data for the decision trees. Once the training data
+reaches 250000, the number of irrelevant variables reduces to 1.9, once
+the decision tree sees the complete data i.e. \$ 2\^{}\{15\} \$ unique
+data points, the tree would likely understand that X15 to X20 are noise
+varaibles, and would avoid adding them as split variable
+
+    \subsubsection{3) Generate a data set of size m = 10000, and set aside
+8000 points for training, and 2000 points for testing. The remaining
+questions should all be applied to this data
+set.}\label{generate-a-data-set-of-size-m-10000-and-set-aside-8000-points-for-training-and-2000-points-for-testing.-the-remaining-questions-should-all-be-applied-to-this-data-set.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{master\PYZus{}data} \PY{o}{=} \PY{n}{data\PYZus{}generator}\PY{p}{(}\PY{l+m+mi}{10000}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{train} \PY{o}{=} \PY{n}{master\PYZus{}data}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n}{frac}\PY{o}{=}\PY{l+m+mf}{0.8}\PY{p}{,}\PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{)}
+         \PY{n}{test} \PY{o}{=} \PY{n}{master\PYZus{}data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{train}\PY{o}{.}\PY{n}{index}\PY{p}{)}
+         
+         \PY{n}{train}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{inplace}\PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{drop} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{test}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{inplace}\PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{drop} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{a) Pruning by Depth:}\label{a-pruning-by-depth}
+
+\paragraph{Consider growing a tree as a process - running ID3 for
+instance until all splits up to depth d have been performed. Depth d = 0
+should correspond to no decisions - a prediction for Y is made just on
+the raw frequencies of Y in the data. Plot, as a function of d, the
+error on the training set and the error on the test set for a tree grown
+to depth d. What does your data suggest as a good threshold
+depth?}\label{consider-growing-a-tree-as-a-process---running-id3-for-instance-until-all-splits-up-to-depth-d-have-been-performed.-depth-d-0-should-correspond-to-no-decisions---a-prediction-for-y-is-made-just-on-the-raw-frequencies-of-y-in-the-data.-plot-as-a-function-of-d-the-error-on-the-training-set-and-the-error-on-the-test-set-for-a-tree-grown-to-depth-d.-what-does-your-data-suggest-as-a-good-threshold-depth}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{depth} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{22}\PY{p}{)}\PY{p}{)}
+         \PY{n}{training\PYZus{}error} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{test\PYZus{}error} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{22}\PY{p}{)}\PY{p}{:}
+             \PY{n}{tree} \PY{o}{=} \PY{n}{Decision\PYZus{}Tree\PYZus{}ID3}\PY{p}{(}\PY{n}{termination\PYZus{}depth}\PY{o}{=} \PY{n}{i}\PY{p}{)}
+             \PY{n}{tree}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{training\PYZus{}error}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{tree}\PY{o}{.}\PY{n}{training\PYZus{}error}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{n}{test\PYZus{}error}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{tree}\PY{o}{.}\PY{n}{error}\PY{p}{(}\PY{n}{test}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{lineplot}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{22}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{training\PYZus{}error}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Depth (d)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Error}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training/Test Error vs Depth of the tree}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{lineplot}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{22}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{test\PYZus{}error}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Train Error}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test Error}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} <matplotlib.legend.Legend at 0x25c7bf5b668>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    As expected the training decreases, as the model complexity i.e. depth
+in this case increases. After the depth reached 9, there is not really
+any improvement in error of Test data. So we can consider, depth = 9 as
+good threshold depth for this data.
+
+    \subsubsection{b) Pruning by Sample
+Size:}\label{b-pruning-by-sample-size}
+
+\paragraph{The less data a split is performed on, the less `accurate' we
+expect the result of that split to be. Let s be a threshold such that if
+the data available at a node in your decision tree is less than or equal
+to s, you do not split and instead decide Y by simple majority vote
+(ties broken by coin flip). Plot, as a function of s, the error on the
+training set and the error on the testing set for a tree split down to
+sample size s. What does your data suggest as a good sample size
+threshold?}\label{the-less-data-a-split-is-performed-on-the-less-accurate-we-expect-the-result-of-that-split-to-be.-let-s-be-a-threshold-such-that-if-the-data-available-at-a-node-in-your-decision-tree-is-less-than-or-equal-to-s-you-do-not-split-and-instead-decide-y-by-simple-majority-vote-ties-broken-by-coin-flip.-plot-as-a-function-of-s-the-error-on-the-training-set-and-the-error-on-the-testing-set-for-a-tree-split-down-to-sample-size-s.-what-does-your-data-suggest-as-a-good-sample-size-threshold}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{n}{leaf\PYZus{}size} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{training\PYZus{}error} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{test\PYZus{}error} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{750}\PY{p}{,} \PY{l+m+mi}{25}\PY{p}{)}\PY{p}{:}
+             \PY{n}{tree} \PY{o}{=} \PY{n}{Decision\PYZus{}Tree\PYZus{}ID3}\PY{p}{(}\PY{n}{min\PYZus{}leaf\PYZus{}size}\PY{o}{=} \PY{n}{i}\PY{p}{)}
+             \PY{n}{tree}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{training\PYZus{}error}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{tree}\PY{o}{.}\PY{n}{training\PYZus{}error}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{n}{test\PYZus{}error}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{tree}\PY{o}{.}\PY{n}{error}\PY{p}{(}\PY{n}{test}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+             \PY{n}{leaf\PYZus{}size}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+         
+             
+         \PY{n}{leaf\PYZus{}size}\PY{o}{.}\PY{n}{reverse}\PY{p}{(}\PY{p}{)}
+         \PY{n}{training\PYZus{}error}\PY{o}{.}\PY{n}{reverse}\PY{p}{(}\PY{p}{)}
+         \PY{n}{test\PYZus{}error}\PY{o}{.}\PY{n}{reverse}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}88}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{lineplot}\PY{p}{(}\PY{n}{leaf\PYZus{}size}\PY{p}{,}\PY{n}{training\PYZus{}error}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Minimum Leaf Size (s)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Error}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training/Test Error vs Minimum Leaf Size}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{lineplot}\PY{p}{(}\PY{n}{leaf\PYZus{}size}\PY{p}{,} \PY{n}{test\PYZus{}error}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Train Error}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test Error}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}88}]:} <matplotlib.legend.Legend at 0x25c7c1d1b70>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    As expected the training error decreases, as the leaf size in this case
+increases. Model complexity is expected to decrease with increase in
+leaf size. After the leaf size reached 25, there is not really any
+improvement in error of Test data. So we can consider, minimun leaf size
+= 25 as good threshold for this data. However, the test error is really
+low i.e. less than 2\% on fully grown tree, so we cannot really conclude
+on any minimum leaf size threshold.
+
+    \subsubsection{c) Pruning by
+Significance:}\label{c-pruning-by-significance}
+
+\paragraph{If a variable X is independent of Y , then X has no value as
+a splitting variable. We can use something like the χ2 -test to estimate
+how likely a potential splitting variable is to be independent, based on
+the test statistic T compared to some threshold T0 (in the usual
+2-outcome case, T0 = 3.841 is used to test at a significance level of p
+= 5\% - see notes for more explanation). Given T0, if given the data for
+X the value of T is less than T0, it is deemed not significant and is
+not used for splitting. If given the data for X the value of T is
+greater than T0, it is deemed significant, and used for splitting. Plot,
+as a function of T0, the error on the training set and the error on the
+testing set for a tree split at significance threshold T0. What does
+your data suggest as a good threshold for
+significance?}\label{if-a-variable-x-is-independent-of-y-then-x-has-no-value-as-a-splitting-variable.-we-can-use-something-like-the-ux3c72--test-to-estimate-how-likely-a-potential-splitting-variable-is-to-be-independent-based-on-the-test-statistic-t-compared-to-some-threshold-t0-in-the-usual-2-outcome-case-t0-3.841-is-used-to-test-at-a-significance-level-of-p-5---see-notes-for-more-explanation.-given-t0-if-given-the-data-for-x-the-value-of-t-is-less-than-t0-it-is-deemed-not-significant-and-is-not-used-for-splitting.-if-given-the-data-for-x-the-value-of-t-is-greater-than-t0-it-is-deemed-significant-and-used-for-splitting.-plot-as-a-function-of-t0-the-error-on-the-training-set-and-the-error-on-the-testing-set-for-a-tree-split-at-significance-threshold-t0.-what-does-your-data-suggest-as-a-good-threshold-for-significance}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{threshold2} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{training\PYZus{}error2} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{test\PYZus{}error2} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{:}
+             \PY{n}{tree} \PY{o}{=} \PY{n}{Decision\PYZus{}Tree\PYZus{}ID3}\PY{p}{(}\PY{n}{sig\PYZus{}threshold} \PY{o}{=} \PY{n}{i}\PY{p}{)}
+             \PY{n}{tree}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{training\PYZus{}error2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{tree}\PY{o}{.}\PY{n}{training\PYZus{}error}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{n}{test\PYZus{}error2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{tree}\PY{o}{.}\PY{n}{error}\PY{p}{(}\PY{n}{test}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+             \PY{n}{threshold2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{threshold} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{training\PYZus{}error} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{test\PYZus{}error} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{25}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+             \PY{n}{tree} \PY{o}{=} \PY{n}{Decision\PYZus{}Tree\PYZus{}ID3}\PY{p}{(}\PY{n}{sig\PYZus{}threshold} \PY{o}{=} \PY{n}{i}\PY{p}{)}
+             \PY{n}{tree}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{train}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{training\PYZus{}error}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{tree}\PY{o}{.}\PY{n}{training\PYZus{}error}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{n}{test\PYZus{}error}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{tree}\PY{o}{.}\PY{n}{error}\PY{p}{(}\PY{n}{test}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+             \PY{n}{threshold}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{thres\PYZus{}final} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{threshold2}\PY{p}{)} \PY{o}{+} \PY{n+nb}{list}\PY{p}{(}\PY{n}{threshold}\PY{p}{)}
+         \PY{n}{training\PYZus{}error\PYZus{}final} \PY{o}{=} \PY{n}{training\PYZus{}error2} \PY{o}{+} \PY{n}{training\PYZus{}error}
+         \PY{n}{test\PYZus{}error\PYZus{}final} \PY{o}{=} \PY{n}{test\PYZus{}error2} \PY{o}{+} \PY{n}{test\PYZus{}error}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{thres\PYZus{}final}\PY{o}{.}\PY{n}{reverse}\PY{p}{(}\PY{p}{)}
+         \PY{n}{training\PYZus{}error\PYZus{}final}\PY{o}{.}\PY{n}{reverse}\PY{p}{(}\PY{p}{)}
+         \PY{n}{test\PYZus{}error\PYZus{}final}\PY{o}{.}\PY{n}{reverse}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{lineplot}\PY{p}{(}\PY{n}{thres\PYZus{}final}\PY{p}{,}\PY{n}{training\PYZus{}error\PYZus{}final}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Chi\PYZhy{}square threshold (T)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Error}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training/Test Error vs chi\PYZhy{}square threshold T}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{lineplot}\PY{p}{(}\PY{n}{thres\PYZus{}final}\PY{p}{,} \PY{n}{test\PYZus{}error\PYZus{}final}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Train Error}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test Error}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} <matplotlib.legend.Legend at 0x28a402a1d68>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    As we keep a higher threshold for chi-sqaure significance test, we see
+that most of the variable are not considered in the tree which results
+in increase of the training error and test error. Again since the error
+on the test error is really low, its difficult to decide on the the
+threshold. p= 5\% (T = 3.841) seems to be a good threshold for now.
+
+    \subsubsection{5) Repeat the computation of Problem 2, growing your
+trees only to depth d as chosen in 3.a. How does this change the
+likelihood or frequency of including spurious variables in your
+trees?}\label{repeat-the-computation-of-problem-2-growing-your-trees-only-to-depth-d-as-chosen-in-3.a.-how-does-this-change-the-likelihood-or-frequency-of-including-spurious-variables-in-your-trees}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{d} \PY{o}{=} \PY{l+m+mi}{9}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{k}{def} \PY{n+nf}{avg\PYZus{}irr\PYZus{}var\PYZus{}new}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{irrelevant\PYZus{}variables} \PY{o}{=} \PY{n}{irrelevant\PYZus{}variables}\PY{p}{,} \PY{n}{model\PYZus{}simulations} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+             \PY{n}{out} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{tqdm}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n}{model\PYZus{}simulations}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{data} \PY{o}{=} \PY{n}{data\PYZus{}generator}\PY{p}{(}\PY{n}{m}\PY{p}{)}
+                 \PY{n}{tree} \PY{o}{=} \PY{n}{Decision\PYZus{}Tree\PYZus{}ID3}\PY{p}{(}\PY{n}{termination\PYZus{}depth}\PY{o}{=} \PY{n}{d}\PY{p}{)}
+                 \PY{n}{tree}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{out}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{tree}\PY{o}{.}\PY{n}{get\PYZus{}irrelevant\PYZus{}variable}\PY{p}{(}\PY{n}{irrelevant\PYZus{}variables}\PY{o}{=} \PY{n}{irrelevant\PYZus{}variables}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{out}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{out}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{depth\PYZus{}irv} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{,}\PY{l+m+mi}{2500}\PY{p}{,}\PY{l+m+mi}{5000}\PY{p}{,}\PY{l+m+mi}{10000}\PY{p}{,}\PY{l+m+mi}{50000}\PY{p}{,}\PY{l+m+mi}{100000}\PY{p}{]}
+         \PY{n}{irv\PYZus{}var\PYZus{}d} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{tqdm}\PY{p}{(}\PY{n}{depth\PYZus{}irv}\PY{p}{)}\PY{p}{:}
+             \PY{n}{irv\PYZus{}var\PYZus{}d}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{avg\PYZus{}irr\PYZus{}var\PYZus{}new}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+  0\%|                                                                                            | 0/8 [00:00<?, ?it/s]
+
+
+  0\%|                                                                                            | 0/5 [00:00<?, ?it/s]
+
+
+ 20\%|████████████████▊                                                                   | 1/5 [00:03<00:14,  3.67s/it]
+
+
+ 40\%|█████████████████████████████████▌                                                  | 2/5 [00:08<00:12,  4.05s/it]
+
+
+ 60\%|██████████████████████████████████████████████████▍                                 | 3/5 [00:13<00:08,  4.35s/it]
+
+
+ 80\%|███████████████████████████████████████████████████████████████████▏                | 4/5 [00:18<00:04,  4.48s/it]
+
+
+100\%|████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:23<00:00,  4.67s/it]
+
+
+
+
+ 12\%|██████████▌                                                                         | 1/8 [00:23<02:44, 23.57s/it]
+
+
+  0\%|                                                                                            | 0/5 [00:00<?, ?it/s]
+
+
+ 20\%|████████████████▊                                                                   | 1/5 [00:13<00:55, 13.78s/it]
+
+
+ 40\%|█████████████████████████████████▌                                                  | 2/5 [00:26<00:40, 13.49s/it]
+
+
+ 60\%|██████████████████████████████████████████████████▍                                 | 3/5 [00:40<00:27, 13.53s/it]
+
+
+ 80\%|███████████████████████████████████████████████████████████████████▏                | 4/5 [00:52<00:13, 13.29s/it]
+
+
+100\%|████████████████████████████████████████████████████████████████████████████████████| 5/5 [01:07<00:00, 13.66s/it]
+
+
+
+
+ 25\%|█████████████████████                                                               | 2/8 [01:31<03:40, 36.74s/it]
+
+
+  0\%|                                                                                            | 0/5 [00:00<?, ?it/s]
+
+
+ 20\%|████████████████▊                                                                   | 1/5 [00:22<01:29, 22.44s/it]
+
+
+ 40\%|█████████████████████████████████▌                                                  | 2/5 [00:43<01:06, 22.09s/it]
+
+
+ 60\%|██████████████████████████████████████████████████▍                                 | 3/5 [01:02<00:42, 21.22s/it]
+
+
+ 80\%|███████████████████████████████████████████████████████████████████▏                | 4/5 [01:23<00:20, 20.96s/it]
+
+
+100\%|████████████████████████████████████████████████████████████████████████████████████| 5/5 [01:41<00:00, 20.08s/it]
+
+
+
+
+ 38\%|███████████████████████████████▌                                                    | 3/8 [03:12<04:40, 56.11s/it]
+
+
+  0\%|                                                                                            | 0/5 [00:00<?, ?it/s]
+
+
+ 20\%|████████████████▊                                                                   | 1/5 [00:32<02:08, 32.11s/it]
+
+
+ 40\%|█████████████████████████████████▌                                                  | 2/5 [01:06<01:38, 32.67s/it]
+
+
+ 60\%|██████████████████████████████████████████████████▍                                 | 3/5 [01:40<01:06, 33.19s/it]
+
+
+ 80\%|███████████████████████████████████████████████████████████████████▏                | 4/5 [02:10<00:32, 32.19s/it]
+
+
+100\%|████████████████████████████████████████████████████████████████████████████████████| 5/5 [02:42<00:00, 32.08s/it]
+
+
+
+
+ 50\%|██████████████████████████████████████████                                          | 4/8 [05:54<05:51, 87.93s/it]
+
+
+  0\%|                                                                                            | 0/5 [00:00<?, ?it/s]
+
+
+ 20\%|████████████████▊                                                                   | 1/5 [00:42<02:49, 42.28s/it]
+
+
+ 40\%|█████████████████████████████████▌                                                  | 2/5 [01:25<02:08, 42.70s/it]
+
+
+ 60\%|██████████████████████████████████████████████████▍                                 | 3/5 [02:08<01:25, 42.76s/it]
+
+
+ 80\%|███████████████████████████████████████████████████████████████████▏                | 4/5 [02:51<00:42, 42.70s/it]
+
+
+100\%|████████████████████████████████████████████████████████████████████████████████████| 5/5 [03:34<00:00, 42.73s/it]
+
+
+
+
+ 62\%|███████████████████████████████████████████████████▉                               | 5/8 [09:28<06:17, 125.82s/it]
+
+
+  0\%|                                                                                            | 0/5 [00:00<?, ?it/s]
+
+
+ 20\%|████████████████▊                                                                   | 1/5 [00:54<03:36, 54.23s/it]
+
+
+ 40\%|█████████████████████████████████▌                                                  | 2/5 [01:48<02:42, 54.20s/it]
+
+
+ 60\%|██████████████████████████████████████████████████▍                                 | 3/5 [02:50<01:53, 56.72s/it]
+
+
+ 80\%|███████████████████████████████████████████████████████████████████▏                | 4/5 [03:48<00:57, 57.06s/it]
+
+
+100\%|████████████████████████████████████████████████████████████████████████████████████| 5/5 [04:48<00:00, 57.79s/it]
+
+
+
+
+ 75\%|██████████████████████████████████████████████████████████████▎                    | 6/8 [14:17<05:49, 174.58s/it]
+
+
+  0\%|                                                                                            | 0/5 [00:00<?, ?it/s]
+
+
+ 20\%|████████████████▊                                                                   | 1/5 [01:21<05:27, 81.85s/it]
+
+
+ 40\%|█████████████████████████████████▌                                                  | 2/5 [02:42<04:04, 81.57s/it]
+
+
+ 60\%|██████████████████████████████████████████████████▍                                 | 3/5 [04:05<02:43, 81.88s/it]
+
+
+ 80\%|███████████████████████████████████████████████████████████████████▏                | 4/5 [05:28<01:22, 82.18s/it]
+
+
+100\%|████████████████████████████████████████████████████████████████████████████████████| 5/5 [06:45<00:00, 80.82s/it]
+
+
+
+
+ 88\%|████████████████████████████████████████████████████████████████████████▋          | 7/8 [21:03<04:03, 243.97s/it]
+
+
+  0\%|                                                                                            | 0/5 [00:00<?, ?it/s]
+
+
+ 20\%|████████████████▊                                                                   | 1/5 [01:34<06:17, 94.43s/it]
+
+
+ 40\%|█████████████████████████████████▌                                                  | 2/5 [03:07<04:42, 94.13s/it]
+
+
+ 60\%|██████████████████████████████████████████████████▍                                 | 3/5 [04:43<03:08, 94.48s/it]
+
+
+ 80\%|███████████████████████████████████████████████████████████████████▏                | 4/5 [06:23<01:36, 96.32s/it]
+
+
+100\%|████████████████████████████████████████████████████████████████████████████████████| 5/5 [08:01<00:00, 96.60s/it]
+
+
+
+
+100\%|███████████████████████████████████████████████████████████████████████████████████| 8/8 [29:04<00:00, 315.10s/it]
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{lineplot}\PY{p}{(}\PY{n}{depth\PYZus{}irv}\PY{p}{,}\PY{n}{irv\PYZus{}var\PYZus{}d}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Sample Size}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average Irrevelant Variables}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Sample Size vs Average Irrevelant Variables w Depth Pruning}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}44}]:} Text(0.5,1,'Sample Size vs Average Irrevelant Variables w Depth Pruning')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_39_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Post assigning pruning conditions of depth = 9, we see that average of
+number of spurious variables included in the tree reduces as compared to
+a fully grown tree.
+
+    \subsubsection{6) Repeat the computation of Problem 2, splitting your
+trees only to sample size s as chosen in 3.b. How does this change the
+likelihood or frequency of including spurious variables in your
+trees?}\label{repeat-the-computation-of-problem-2-splitting-your-trees-only-to-sample-size-s-as-chosen-in-3.b.-how-does-this-change-the-likelihood-or-frequency-of-including-spurious-variables-in-your-trees}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k}{def} \PY{n+nf}{avg\PYZus{}irr\PYZus{}var\PYZus{}new}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{irrelevant\PYZus{}variables} \PY{o}{=} \PY{n}{irrelevant\PYZus{}variables}\PY{p}{,} \PY{n}{model\PYZus{}simulations} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+             \PY{n}{out} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{tqdm}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n}{model\PYZus{}simulations}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{data} \PY{o}{=} \PY{n}{data\PYZus{}generator}\PY{p}{(}\PY{n}{m}\PY{p}{)}
+                 \PY{n}{tree} \PY{o}{=} \PY{n}{Decision\PYZus{}Tree\PYZus{}ID3}\PY{p}{(}\PY{n}{min\PYZus{}leaf\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{50}\PY{p}{)}
+                 \PY{n}{tree}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{out}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{tree}\PY{o}{.}\PY{n}{get\PYZus{}irrelevant\PYZus{}variable}\PY{p}{(}\PY{n}{irrelevant\PYZus{}variables}\PY{o}{=} \PY{n}{irrelevant\PYZus{}variables}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{out}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{out}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{leaf\PYZus{}size\PYZus{}irv} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{,}\PY{l+m+mi}{2500}\PY{p}{,}\PY{l+m+mi}{5000}\PY{p}{,}\PY{l+m+mi}{10000}\PY{p}{,}\PY{l+m+mi}{50000}\PY{p}{,}\PY{l+m+mi}{100000}\PY{p}{]}
+         \PY{n}{irv\PYZus{}var\PYZus{}ls} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{tqdm}\PY{p}{(}\PY{n}{leaf\PYZus{}size\PYZus{}irv}\PY{p}{)}\PY{p}{:}
+             \PY{n}{irv\PYZus{}var\PYZus{}ls}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{avg\PYZus{}irr\PYZus{}var\PYZus{}new}\PY{p}{(}\PY{n}{m} \PY{o}{=} \PY{n}{i}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+  0\%|                                                                                            | 0/8 [00:00<?, ?it/s]
+  0\%|                                                                                            | 0/5 [00:00<?, ?it/s]
+ 20\%|████████████████▊                                                                   | 1/5 [00:01<00:04,  1.05s/it]
+ 40\%|█████████████████████████████████▌                                                  | 2/5 [00:02<00:03,  1.06s/it]
+ 60\%|██████████████████████████████████████████████████▍                                 | 3/5 [00:02<00:01,  1.07it/s]
+ 80\%|███████████████████████████████████████████████████████████████████▏                | 4/5 [00:03<00:01,  1.02s/it]
+100\%|████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:05<00:00,  1.05s/it]
+ 12\%|██████████▌                                                                         | 1/8 [00:05<00:35,  5.12s/it]
+  0\%|                                                                                            | 0/5 [00:00<?, ?it/s]
+ 20\%|████████████████▊                                                                   | 1/5 [00:04<00:19,  4.92s/it]
+ 40\%|█████████████████████████████████▌                                                  | 2/5 [00:10<00:15,  5.23s/it]
+ 60\%|██████████████████████████████████████████████████▍                                 | 3/5 [00:15<00:09,  4.96s/it]
+ 80\%|███████████████████████████████████████████████████████████████████▏                | 4/5 [00:20<00:05,  5.07s/it]
+100\%|████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:26<00:00,  5.21s/it]
+ 25\%|█████████████████████                                                               | 2/8 [00:31<01:08, 11.41s/it]
+  0\%|                                                                                            | 0/5 [00:00<?, ?it/s]
+ 20\%|████████████████▊                                                                   | 1/5 [00:09<00:36,  9.04s/it]
+ 40\%|█████████████████████████████████▌                                                  | 2/5 [00:17<00:26,  8.95s/it]
+ 60\%|██████████████████████████████████████████████████▍                                 | 3/5 [00:26<00:18,  9.02s/it]
+ 80\%|███████████████████████████████████████████████████████████████████▏                | 4/5 [00:36<00:09,  9.11s/it]
+100\%|████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:45<00:00,  9.17s/it]
+ 38\%|███████████████████████████████▌                                                    | 3/8 [01:16<01:48, 21.66s/it]
+  0\%|                                                                                            | 0/5 [00:00<?, ?it/s]
+ 20\%|████████████████▊                                                                   | 1/5 [00:19<01:16, 19.10s/it]
+ 40\%|█████████████████████████████████▌                                                  | 2/5 [00:39<00:58, 19.41s/it]
+ 60\%|██████████████████████████████████████████████████▍                                 | 3/5 [00:56<00:37, 18.86s/it]
+ 80\%|███████████████████████████████████████████████████████████████████▏                | 4/5 [01:17<00:19, 19.33s/it]
+100\%|████████████████████████████████████████████████████████████████████████████████████| 5/5 [01:35<00:00, 18.98s/it]
+ 50\%|██████████████████████████████████████████                                          | 4/8 [02:52<02:55, 43.79s/it]
+  0\%|                                                                                            | 0/5 [00:00<?, ?it/s]
+ 20\%|████████████████▊                                                                   | 1/5 [00:27<01:49, 27.26s/it]
+ 40\%|█████████████████████████████████▌                                                  | 2/5 [00:55<01:22, 27.42s/it]
+ 60\%|██████████████████████████████████████████████████▍                                 | 3/5 [01:23<00:55, 27.62s/it]
+ 80\%|███████████████████████████████████████████████████████████████████▏                | 4/5 [01:51<00:27, 27.90s/it]
+100\%|████████████████████████████████████████████████████████████████████████████████████| 5/5 [02:17<00:00, 27.36s/it]
+ 62\%|████████████████████████████████████████████████████▌                               | 5/8 [05:10<03:35, 71.99s/it]
+  0\%|                                                                                            | 0/5 [00:00<?, ?it/s]
+ 20\%|████████████████▊                                                                   | 1/5 [00:40<02:42, 40.60s/it]
+ 40\%|█████████████████████████████████▌                                                  | 2/5 [01:20<02:00, 40.28s/it]
+ 60\%|██████████████████████████████████████████████████▍                                 | 3/5 [02:02<01:21, 40.80s/it]
+ 80\%|███████████████████████████████████████████████████████████████████▏                | 4/5 [02:40<00:40, 40.17s/it]
+100\%|████████████████████████████████████████████████████████████████████████████████████| 5/5 [03:22<00:00, 40.50s/it]
+ 75\%|██████████████████████████████████████████████████████████████▎                    | 6/8 [08:32<03:42, 111.03s/it]
+  0\%|                                                                                            | 0/5 [00:00<?, ?it/s]
+ 20\%|████████████████▊                                                                   | 1/5 [01:19<05:16, 79.08s/it]
+ 40\%|█████████████████████████████████▌                                                  | 2/5 [02:33<03:52, 77.53s/it]
+ 60\%|██████████████████████████████████████████████████▍                                 | 3/5 [03:45<02:32, 76.15s/it]
+ 80\%|███████████████████████████████████████████████████████████████████▏                | 4/5 [05:04<01:16, 76.98s/it]
+100\%|████████████████████████████████████████████████████████████████████████████████████| 5/5 [06:20<00:00, 76.69s/it]
+ 88\%|████████████████████████████████████████████████████████████████████████▋          | 7/8 [14:53<03:11, 191.99s/it]
+  0\%|                                                                                            | 0/5 [00:00<?, ?it/s]
+ 20\%|████████████████▌                                                                  | 1/5 [01:42<06:51, 102.86s/it]
+ 40\%|█████████████████████████████████▏                                                 | 2/5 [03:23<05:06, 102.13s/it]
+ 60\%|██████████████████████████████████████████████████▍                                 | 3/5 [04:57<03:19, 99.83s/it]
+ 80\%|███████████████████████████████████████████████████████████████████▏                | 4/5 [06:26<01:36, 96.57s/it]
+100\%|████████████████████████████████████████████████████████████████████████████████████| 5/5 [07:58<00:00, 95.10s/it]
+100\%|███████████████████████████████████████████████████████████████████████████████████| 8/8 [22:51<00:00, 277.92s/it]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{lineplot}\PY{p}{(}\PY{n}{leaf\PYZus{}size\PYZus{}irv}\PY{p}{,}\PY{n}{irv\PYZus{}var\PYZus{}ls}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training size}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average Irrevelant Variables}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training size vs Avg Irrevelant Variables w/ leaf size pruning}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} Text(0.5,1,'Training size vs Avg Irrevelant Variables w/ leaf size pruning')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_44_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Post assigning pruning conditions of min leaf size = 50, we see that
+average of number of spurious variables included in the tree reduces as
+compared to a fully grown tree. They follow as decreasing trend as m
+increase which is as expected.
+
+    \subsubsection{7) Repeat the computation of Problem 2, splitting your
+trees only at or above threshold level T0 as chosen in 3.c.How does this
+change the likelihood or frequency of including spurious variables in
+your
+trees?}\label{repeat-the-computation-of-problem-2-splitting-your-trees-only-at-or-above-threshold-level-t0-as-chosen-in-3.c.how-does-this-change-the-likelihood-or-frequency-of-including-spurious-variables-in-your-trees}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k}{def} \PY{n+nf}{avg\PYZus{}irr\PYZus{}var\PYZus{}new}\PY{p}{(}\PY{n}{m}\PY{p}{,} \PY{n}{irrelevant\PYZus{}variables} \PY{o}{=} \PY{n}{irrelevant\PYZus{}variables}\PY{p}{,} \PY{n}{model\PYZus{}simulations} \PY{o}{=} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{:}
+             \PY{n}{out} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{tqdm}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n}{model\PYZus{}simulations}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{data} \PY{o}{=} \PY{n}{data\PYZus{}generator}\PY{p}{(}\PY{n}{m}\PY{p}{)}
+                 \PY{n}{tree} \PY{o}{=} \PY{n}{Decision\PYZus{}Tree\PYZus{}ID3}\PY{p}{(}\PY{n}{sig\PYZus{}threshold} \PY{o}{=} \PY{l+m+mf}{3.841}\PY{p}{)}
+                 \PY{n}{tree}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{out}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{tree}\PY{o}{.}\PY{n}{get\PYZus{}irrelevant\PYZus{}variable}\PY{p}{(}\PY{n}{irrelevant\PYZus{}variables}\PY{o}{=} \PY{n}{irrelevant\PYZus{}variables}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{out}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{out}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{avg\PYZus{}irre\PYZus{}var\PYZus{}t} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{m\PYZus{}t} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{,}\PY{l+m+mi}{2500}\PY{p}{,}\PY{l+m+mi}{5000}\PY{p}{,}\PY{l+m+mi}{10000}\PY{p}{,}\PY{l+m+mi}{50000}\PY{p}{,}\PY{l+m+mi}{75000}\PY{p}{,}\PY{l+m+mi}{100000}\PY{p}{]}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{tqdm}\PY{p}{(}\PY{n}{m\PYZus{}t}\PY{p}{)}\PY{p}{:}
+             \PY{n}{avg\PYZus{}irre\PYZus{}var\PYZus{}t}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{avg\PYZus{}irr\PYZus{}var\PYZus{}new}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+  0\%|                                                                                            | 0/9 [00:00<?, ?it/s]
+  0\%|                                                                                            | 0/8 [00:00<?, ?it/s]
+ 12\%|██████████▌                                                                         | 1/8 [00:04<00:29,  4.20s/it]
+ 25\%|█████████████████████                                                               | 2/8 [00:08<00:24,  4.17s/it]
+ 38\%|███████████████████████████████▌                                                    | 3/8 [00:11<00:19,  3.94s/it]
+ 50\%|██████████████████████████████████████████                                          | 4/8 [00:16<00:16,  4.10s/it]
+ 62\%|████████████████████████████████████████████████████▌                               | 5/8 [00:20<00:12,  4.03s/it]
+ 75\%|███████████████████████████████████████████████████████████████                     | 6/8 [00:23<00:07,  3.91s/it]
+ 88\%|█████████████████████████████████████████████████████████████████████████▌          | 7/8 [00:26<00:03,  3.72s/it]
+100\%|████████████████████████████████████████████████████████████████████████████████████| 8/8 [00:30<00:00,  3.74s/it]
+ 11\%|█████████▎                                                                          | 1/9 [00:30<04:05, 30.73s/it]
+  0\%|                                                                                            | 0/8 [00:00<?, ?it/s]
+ 12\%|██████████▌                                                                         | 1/8 [00:09<01:05,  9.34s/it]
+ 25\%|█████████████████████                                                               | 2/8 [00:23<01:04, 10.75s/it]
+ 38\%|███████████████████████████████▌                                                    | 3/8 [00:33<00:52, 10.57s/it]
+ 50\%|██████████████████████████████████████████                                          | 4/8 [00:46<00:45, 11.32s/it]
+ 62\%|████████████████████████████████████████████████████▌                               | 5/8 [01:01<00:36, 12.31s/it]
+ 75\%|███████████████████████████████████████████████████████████████                     | 6/8 [01:13<00:24, 12.40s/it]
+ 88\%|█████████████████████████████████████████████████████████████████████████▌          | 7/8 [01:26<00:12, 12.36s/it]
+100\%|████████████████████████████████████████████████████████████████████████████████████| 8/8 [01:37<00:00, 12.14s/it]
+ 22\%|██████████████████▋                                                                 | 2/9 [02:08<05:55, 50.83s/it]
+  0\%|                                                                                            | 0/8 [00:00<?, ?it/s]
+ 12\%|██████████▌                                                                         | 1/8 [00:16<01:52, 16.12s/it]
+ 25\%|█████████████████████                                                               | 2/8 [00:34<01:40, 16.74s/it]
+ 38\%|███████████████████████████████▌                                                    | 3/8 [00:50<01:23, 16.69s/it]
+ 50\%|██████████████████████████████████████████                                          | 4/8 [01:08<01:07, 16.82s/it]
+ 62\%|████████████████████████████████████████████████████▌                               | 5/8 [01:25<00:50, 16.96s/it]
+ 75\%|███████████████████████████████████████████████████████████████                     | 6/8 [01:44<00:35, 17.64s/it]
+ 88\%|█████████████████████████████████████████████████████████████████████████▌          | 7/8 [02:02<00:17, 17.87s/it]
+100\%|████████████████████████████████████████████████████████████████████████████████████| 8/8 [02:22<00:00, 18.31s/it]
+ 33\%|████████████████████████████                                                        | 3/9 [04:30<07:49, 78.26s/it]
+  0\%|                                                                                            | 0/8 [00:00<?, ?it/s]
+ 12\%|██████████▌                                                                         | 1/8 [00:31<03:40, 31.46s/it]
+ 25\%|█████████████████████                                                               | 2/8 [01:02<03:07, 31.29s/it]
+ 38\%|███████████████████████████████▌                                                    | 3/8 [01:32<02:34, 30.96s/it]
+ 50\%|██████████████████████████████████████████                                          | 4/8 [02:05<02:06, 31.69s/it]
+ 62\%|████████████████████████████████████████████████████▌                               | 5/8 [02:39<01:36, 32.24s/it]
+ 75\%|███████████████████████████████████████████████████████████████                     | 6/8 [03:15<01:06, 33.39s/it]
+ 88\%|█████████████████████████████████████████████████████████████████████████▌          | 7/8 [03:45<00:32, 32.29s/it]
+100\%|████████████████████████████████████████████████████████████████████████████████████| 8/8 [04:19<00:00, 32.84s/it]
+ 44\%|████████████████████████████████████▉                                              | 4/9 [08:50<11:02, 132.59s/it]
+  0\%|                                                                                            | 0/8 [00:00<?, ?it/s]
+ 12\%|██████████▌                                                                         | 1/8 [00:43<05:06, 43.83s/it]
+ 25\%|█████████████████████                                                               | 2/8 [01:26<04:21, 43.50s/it]
+ 38\%|███████████████████████████████▌                                                    | 3/8 [02:08<03:35, 43.17s/it]
+ 50\%|██████████████████████████████████████████                                          | 4/8 [02:51<02:52, 43.03s/it]
+ 62\%|████████████████████████████████████████████████████▌                               | 5/8 [03:35<02:10, 43.34s/it]
+ 75\%|███████████████████████████████████████████████████████████████                     | 6/8 [04:17<01:25, 42.76s/it]
+ 88\%|█████████████████████████████████████████████████████████████████████████▌          | 7/8 [05:04<00:44, 44.27s/it]
+100\%|████████████████████████████████████████████████████████████████████████████████████| 8/8 [05:47<00:00, 43.82s/it]
+ 56\%|██████████████████████████████████████████████                                     | 5/9 [14:37<13:08, 197.13s/it]
+  0\%|                                                                                            | 0/8 [00:00<?, ?it/s]
+ 12\%|██████████▌                                                                         | 1/8 [00:59<06:59, 59.88s/it]
+ 25\%|█████████████████████                                                               | 2/8 [02:00<06:01, 60.19s/it]
+ 38\%|███████████████████████████████▌                                                    | 3/8 [02:58<04:57, 59.53s/it]
+ 50\%|██████████████████████████████████████████                                          | 4/8 [03:57<03:57, 59.27s/it]
+ 62\%|████████████████████████████████████████████████████▌                               | 5/8 [04:53<02:55, 58.38s/it]
+ 75\%|███████████████████████████████████████████████████████████████                     | 6/8 [05:43<01:51, 55.79s/it]
+ 88\%|█████████████████████████████████████████████████████████████████████████▌          | 7/8 [06:41<00:56, 56.36s/it]
+100\%|████████████████████████████████████████████████████████████████████████████████████| 8/8 [07:32<00:00, 54.80s/it]
+ 67\%|███████████████████████████████████████████████████████▎                           | 6/9 [22:10<13:41, 273.70s/it]
+  0\%|                                                                                            | 0/8 [00:00<?, ?it/s]
+ 12\%|██████████▌                                                                         | 1/8 [01:25<09:55, 85.14s/it]
+ 25\%|█████████████████████                                                               | 2/8 [02:54<08:38, 86.50s/it]
+ 38\%|███████████████████████████████▌                                                    | 3/8 [04:17<07:06, 85.33s/it]
+ 50\%|██████████████████████████████████████████                                          | 4/8 [05:46<05:45, 86.47s/it]
+ 62\%|████████████████████████████████████████████████████▌                               | 5/8 [07:16<04:22, 87.51s/it]
+ 75\%|███████████████████████████████████████████████████████████████                     | 6/8 [08:42<02:54, 87.10s/it]
+ 88\%|█████████████████████████████████████████████████████████████████████████▌          | 7/8 [10:02<01:24, 84.83s/it]
+100\%|████████████████████████████████████████████████████████████████████████████████████| 8/8 [11:21<00:00, 83.23s/it]
+ 78\%|████████████████████████████████████████████████████████████████▌                  | 7/9 [33:31<13:12, 396.09s/it]
+  0\%|                                                                                            | 0/8 [00:00<?, ?it/s]
+ 12\%|██████████▌                                                                         | 1/8 [01:29<10:25, 89.38s/it]
+ 25\%|█████████████████████                                                               | 2/8 [03:03<09:04, 90.83s/it]
+ 38\%|███████████████████████████████▌                                                    | 3/8 [04:34<07:34, 90.94s/it]
+ 50\%|██████████████████████████████████████████                                          | 4/8 [06:08<06:07, 91.79s/it]
+ 62\%|████████████████████████████████████████████████████▌                               | 5/8 [07:47<04:42, 94.01s/it]
+ 75\%|███████████████████████████████████████████████████████████████                     | 6/8 [09:12<03:02, 91.20s/it]
+ 88\%|█████████████████████████████████████████████████████████████████████████▌          | 7/8 [10:43<01:31, 91.19s/it]
+100\%|████████████████████████████████████████████████████████████████████████████████████| 8/8 [12:18<00:00, 92.43s/it]
+ 89\%|█████████████████████████████████████████████████████████████████████████▊         | 8/9 [45:50<08:18, 498.94s/it]
+  0\%|                                                                                            | 0/8 [00:00<?, ?it/s]
+ 12\%|██████████▍                                                                        | 1/8 [01:42<11:55, 102.16s/it]
+ 25\%|█████████████████████                                                               | 2/8 [03:15<09:57, 99.55s/it]
+ 38\%|███████████████████████████████▌                                                    | 3/8 [04:50<08:11, 98.29s/it]
+ 50\%|██████████████████████████████████████████                                          | 4/8 [06:27<06:30, 97.73s/it]
+ 62\%|████████████████████████████████████████████████████▌                               | 5/8 [08:02<04:50, 96.93s/it]
+ 75\%|███████████████████████████████████████████████████████████████                     | 6/8 [09:35<03:11, 95.65s/it]
+ 88\%|█████████████████████████████████████████████████████████████████████████▌          | 7/8 [11:16<01:37, 97.46s/it]
+100\%|████████████████████████████████████████████████████████████████████████████████████| 8/8 [12:59<00:00, 99.08s/it]
+100\%|███████████████████████████████████████████████████████████████████████████████████| 9/9 [58:50<00:00, 583.16s/it]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{lineplot}\PY{p}{(}\PY{n}{m\PYZus{}t}\PY{p}{,}\PY{n}{avg\PYZus{}irre\PYZus{}var\PYZus{}t}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training data size}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Average Irrevelant Variables}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training data size vs Average Irrevelant Variables w Chi\PYZus{}square T}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} Text(0.5,1,'Training data size vs Average Irrevelant Variables w Chi\_square T')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_49_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Post assigning pruning conditions of significa threshold = 3.841, we see
+that average of number of spurious variables included in the tree
+reduces as compared to a fully grown tree. They follow as decreasing
+trend as m increase which is as expected.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
