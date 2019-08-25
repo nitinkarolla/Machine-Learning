@@ -1,0 +1,162 @@
+<Study id="cebersole.virginia" datagroup="research">
+  <Definitions>
+    
+    <Task id="startpage">startpage.htm</Task>
+    <Task id="welcome">welcome.htm</Task>
+    
+    <Task id="elmstrong">elmstrong.htm</Task>
+    <Task id="elmweak">elmweak.htm</Task>  
+    <Task id="elmques">elmques.jsp</Task>  
+    
+    <Task id="highpower">highpower.htm</Task>
+    <Task id="lowpower">lowpower.htm</Task>    
+    <Task id="filler1">filler1.htm</Task>
+    <Task id="filler2">filler2.htm</Task>
+    <Task id="galinskyvignette">galinskyvignette.htm</Task>
+    
+    <Task id="mcmost">mcmost.htm</Task>
+    <Task id="mcsome">mcsome.htm</Task>    
+    <Task id="mcfiller">mcfiller.htm</Task>
+    <Task id="moninvignette">moninvignette.htm</Task>
+    
+    <Task id="bestgrade">bestgrade.htm</Task>
+    <Task id="worstgrade">worstgrade.htm</Task>   
+    
+    <Task id="stroopinstructions">stroopinstruct.htm</Task>
+    <Task id="stroopprac" file="stroop-practice.js">/common/all/js/pip/0.2.2/dist/piindex.jsp</Task>
+    <Task id="stroopinstructionstest">stroopinstructtest.htm</Task>
+    <Task id="stroop" file="stroop-task.js">/common/all/js/pip/0.2.2/dist/piindex.jsp</Task>
+    
+    <Task id="anagrams">anagrams.htm</Task>
+    
+    <Task id="availinstruct">availinstruct.htm</Task>
+    <Task id="availr">availr.htm</Task>  
+    <Task id="availk">availk.htm</Task>  
+    <Task id="availl">availl.htm</Task>  
+    <Task id="availn">availn.htm</Task>  
+    <Task id="availv">availv.htm</Task>  
+    
+    <Task id="tempagenf">tempagenf.htm</Task>
+    <Task id="tempagenm">tempagenm.htm</Task>
+    <Task id="tempcomf">tempcomf.htm</Task>
+    <Task id="tempcomm">tempcomm.htm</Task>
+    <Task id="tempfollowup">tempfollowup.htm</Task>  
+    <Task id="tempestimate">tempestimate.htm</Task> 
+
+    <Task id="inlab">inlab.htm</Task>
+    
+    <Task id="attention">attentioncheck.htm</Task>
+    <Task id="bigfive">bigfive.jsp</Task>
+    <Task id="demographics">demographics.htm</Task>
+    <Task id="intrinsic">intrinsic.jsp</Task>
+    <Task id="mood">mood.jsp</Task>
+    <Task id="nfc">nfc.jsp</Task>
+    <Task id="participation">participation.jsp</Task>
+    <Task id="selfesteem">selfesteem.jsp</Task>
+    <Task id="stress">stress.jsp</Task>
+    
+    <Task id="debrief">debrief.htm</Task>
+    <Task id="participantid">participantid.htm</Task>
+
+  </Definitions>
+  <Map>
+  
+  <Task id="startpage" />
+  <Task id="welcome" />
+  
+  <Branch id="experiments" type="group" select="9">
+      	
+  <Branch id="cacioppo" type="group">
+    <Branch id="elm" type="group" select="1">
+      	       <Task id="elmstrong" />
+      	       <Task id="elmweak" />
+    </Branch>         
+    <Task id="elmques" />
+  </Branch>  
+  
+  <Branch id="galinsky" type="group">
+      <Branch id="power" type="group" select="1">
+      	       <Task id="highpower" />
+      	       <Task id="lowpower" />
+      </Branch>      	
+      <Task id="filler1" />
+      <Task id="filler2" />
+      <Task id="galinskyvignette"/>
+   </Branch>   
+
+  
+  <Branch id="monin" type="group">
+  <Branch id="mc" type="group" select="1">
+      	       <Task id="mcmost" />
+      	       <Task id="mcsome" />
+      </Branch>      	
+      <Task id="mcfiller" />
+      <Task id="moninvignette"/>
+  </Branch>    
+      
+   <Branch id="ross" type="group">
+   <Branch id="gradedistance" type="group" select="1">
+      	       <Task id="bestgrade" />
+      	       <Task id="worstgrade" />
+      </Branch>  
+   </Branch>   
+    
+   <Branch id="strooptask" type="group">
+   <Task id="stroopinstructions"/>
+   <Task id="stroopprac"/>
+   <Task id="stroopinstructionstest"/>
+   <Task id="stroop"/>  
+   </Branch>
+      
+   <Task id="anagrams"/>
+   
+   <Branch id="tversky" type="group">
+     <Task id="availinstruct" />
+      <Branch id="letters" type="group" select="5">
+      	       <Task id="availr" />
+      	       <Task id="availk" />
+      	       <Task id="availl" />
+      	       <Task id="availn" />
+      	       <Task id="availv" />
+      </Branch>  
+   </Branch>   
+   
+  <Branch id="szymkow" type="group">
+    <Branch id="tempprime" type="group" select="1">
+      	       <Branch id="communal" type="group" select="1">
+      	       	<Task id="tempcomf" />
+      	       	<Task id="tempcomm" />
+      	       </Branch>
+      	       
+      	       <Branch id="agentic" type="group" select="1">
+      	       	<Task id="tempagenf" />
+      	       	<Task id="tempagenm" />
+      	       </Branch>      	       
+      </Branch>      
+    <Task id="tempfollowup" />
+      <Task id="tempestimate" />
+  </Branch>
+ 
+  <Task id="inlab"/>
+  
+  </Branch>
+  
+  
+   <Branch id="individualdifferences" type="group" select="8">   	
+    <Task id="attention"/>
+    <Task id="bigfive"/>
+    <Task id="intrinsic"/>
+    <Task id="mood"/>
+    <Task id="nfc"/>
+    <Task id="participation"/>
+    <Task id="selfesteem"/>
+    <Task id="stress"/>
+   </Branch>
+   
+  <Task id="demographics"/>
+  <Task id="debrief" />
+  <Task id="participantid" />
+  
+
+  </Map>
+</Study> 
